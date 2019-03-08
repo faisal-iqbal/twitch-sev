@@ -1,7 +1,8 @@
 const applicationController = require('./controllers/application.controller');
-const passport = require('./libs/twitchpassport');
-const express = require('express');
-const router = express.Router();
+const streamController      = require('./controllers/stream.controller');
+const passport              = require('./libs/twitchpassport');
+const express               = require('express');
+const router                = express.Router();
 
 // Set route to start OAuth link, this is where you define scopes to request
 router.route('/auth/twitch').get(passport.authenticate('twitch', {
@@ -15,5 +16,7 @@ router.route('/auth/twitch/callback').get(passport.authenticate('twitch', {
 
 router.route('/').get(applicationController.index);
 router.route('/error').get(applicationController.error);
+
+router.route('/stream').get(streamController.index);
 
 module.exports = router;

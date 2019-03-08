@@ -1,10 +1,12 @@
-<html><head><title>Twitch Auth Sample</title></head>
+<html><head><title>Twitch SEV</title></head>
 <% if (loggedin) { %>
-<table>
-    <tr><th>Access Token</th><td><%= accessToken %></td></tr>
-    <tr><th>Refresh Token</th><td><%= refreshToken %></td></tr>
-</table>
+    <h3>Step 1: Enter your favourite twitch streamer name to view live stream, chat and events.</h3>
+    <form action='/stream'>
+        <input type='text' placeholder="Enter Your Favourite Streamer Name" name='streamer_name'/>
+        <input type='submit' value='Load Stream'/>
+    </form>
 <% } else { %>
+    <h3>Step 1: Click on following button to login with your Twicth account.</h3>
     <a href="/auth/twitch">
         <img src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png">
     </a>
