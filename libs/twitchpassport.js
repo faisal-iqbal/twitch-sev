@@ -37,7 +37,7 @@ passport.use('twitch', new OAuth2Strategy({
     tokenURL: 'https://id.twitch.tv/oauth2/token',
     clientID: process.env.TWITCH_CLIENT_ID,
     clientSecret: process.env.TWITCH_SECRET,
-    callbackURL: process.env.CALLBACK_URL,
+    callbackURL: process.env.BASE_URL + process.env.CALLBACK_URL,
     state: true
   },
   function(accessToken, refreshToken, profile, done) {
