@@ -1,14 +1,29 @@
-<html><head><title>Twitch SEV</title></head>
-<% if (loggedin) { %>
-    <h3>Step 1: Enter your favourite twitch streamer name to view live stream, chat and events.</h3>
-    <form action='/stream'>
-        <input type='text' placeholder="Enter Your Favourite Streamer Name" name='streamer_name'/>
-        <input type='submit' value='Load Stream'/>
-    </form>
-<% } else { %>
-    <h3>Step 1: Click on following button to login with your Twicth account.</h3>
-    <a href="/auth/twitch">
-        <img src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png">
-    </a>
-<% } %>
+<html>
+    <% include ./shared/head %>
+    <body>
+        <% include ./shared/topbar %>
+        <div class="container-fluid">
+            <div class="jumbotron">
+                <h1 class="display-4">Login</h1>
+                <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                <hr class="my-4">
+                <% if (loggedin) { %>
+                    <p>Step 1: Enter your favourite twitch streamer name to view live stream, chat and events.</p>
+                    <form action='/stream' class="form-inline">
+                        <div class="form-group mb-2">
+                            <label for="inputStreamerName" class="sr-only">Enter Your Favourite Streamer Name</label>
+                            <input type='text' class="form-control" placeholder="Your Favourite Streamer" name='streamer_name' id="inputStreamerName"/>
+                        </div>
+                        <input type='submit' value='Load Stream' class="btn btn-primary mb-2"/>
+                    </form>
+                <% } else { %>
+                    <p>Step 1: Click on following button to login with your Twicth account.</p>
+                    <a href="/auth/twitch">
+                        <img src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png">
+                    </a>
+                <% } %>
+            </div>
+            <% include ./shared/footer %>
+        </div>
+    </body>
 </html>

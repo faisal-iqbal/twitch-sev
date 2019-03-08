@@ -1,3 +1,7 @@
+$(function () {
+    loadTwitchEmbed();
+});
+
 var loadTwitchEmbed = () => {
     new Twitch.Embed("twitch-embed", {
         width: 854,

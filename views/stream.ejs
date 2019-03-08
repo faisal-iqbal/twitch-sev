@@ -1,10 +1,34 @@
-<html><head><title>Twitch SEV</title></head>
-    <!-- Add a placeholder for the Twitch embed -->
-    <div id="twitch-embed"></div>
-    <script src="https://embed.twitch.tv/embed/v1.js"></script>
-    <script src="application.js"></script>
-    <script>
-        window.streamer_name = '<%= streamer_name %>';
-        loadTwitchEmbed();
-    </script>
+<html>
+    <% include ./shared/head %>
+    <body>
+        <% include ./shared/topbar %>
+        <div class="container-fluid">
+            <div class='row'>
+                <div class="col">
+                    <form action='/stream' class="form-inline">
+                        <div class="form-group mb-2">
+                            <label for="inputStreamerName" class="sr-only">Enter Your Favourite Streamer Name</label>
+                            <input type='text' class="form-control" placeholder="Your Favourite Streamer" name='streamer_name' id="inputStreamerName" value="<%= streamer_name %>"/>
+                        </div>
+                        <input type='submit' value='Reload Stream' class="btn btn-primary mb-2"/>
+                    </form>
+                    <!-- Add a placeholder for the Twitch embed -->
+                    <div id="twitch-embed"></div>
+                </div>
+            </div>
+            <!--
+            <table>
+                <tr><th>Access Token</th><td><%= accessToken %></td></tr>
+                <tr><th>Refresh Token</th><td><%= refreshToken %></td></tr>
+            </table>
+            -->
+            <% include ./shared/footer %>
+        </div>
+        <script>
+            window.streamer_name = '<%= streamer_name %>';
+        </script>
+        <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+        <script src="https://embed.twitch.tv/embed/v1.js"></script>
+        <script src="application.js"></script>
+    </body>
 </html>
