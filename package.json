@@ -1,18 +1,22 @@
 {
-  "name": "twitch-auth-sample",
+  "name": "twitch-sev",
   "version": "1.0.0",
-  "description": "Twitch API Authentication Example using Node, Express, and Passport.",
+  "description": "Application help its audience see their favorite streamer's Twitch events in real-time. ",
   "main": "index.js",
   "dependencies": {
+    "dotenv": "^6.2.0",
+    "ejs": "^2.6.1",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
-    "handlebars": "^4.0.6",
     "passport": "^0.3.2",
     "passport-oauth": "^1.0.0",
     "request": "^2.81.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^5.15.0"
+  },
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Twitch Interactive, Inc.",

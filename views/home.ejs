@@ -1,0 +1,12 @@
+<html><head><title>Twitch Auth Sample</title></head>
+<% if (loggedin) { %>
+<table>
+    <tr><th>Access Token</th><td><%= accessToken %></td></tr>
+    <tr><th>Refresh Token</th><td><%= refreshToken %></td></tr>
+</table>
+<% } else { %>
+    <a href="/auth/twitch">
+        <img src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png">
+    </a>
+<% } %>
+</html>
