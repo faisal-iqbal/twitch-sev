@@ -27,7 +27,14 @@ var loadWebSocket = () => {
         if((msg.to_name && msg.to_name.toLowerCase() == window.streamer_name)
         ||(msg.from_name && msg.from_name.toLowerCase() == window.streamer_name)) {
             var text = msg.from_name + ' has start following ' + msg.to_name;
-            $('ul#events').append($('<li>').text(text).addClass('list-group-item'));
+            addMessage(text);
         }
     });
+};
+
+var addMessage = (text) => {
+    if ($('ul#events li').length > 9) {
+        $('ul#events li:first-child').remove();
+    }
+    $('ul#events').append($('<li>').text(text).addClass('list-group-item'));
 };
