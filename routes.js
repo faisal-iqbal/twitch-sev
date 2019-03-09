@@ -16,6 +16,7 @@ router.route('/auth/twitch/callback').get(passport.authenticate('twitch', {
 }));
 
 router.route('/').get(applicationController.index);
+router.route('/logout').get(applicationController.logout);
 router.route('/error').get(applicationController.error);
 
 router.route('/stream').get(streamController.index);

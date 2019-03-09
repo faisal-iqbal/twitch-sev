@@ -12,6 +12,7 @@ module.exports = {
             req.session.streamer_name = req.query.streamer_name;
             var data = req.session.passport.user;
             data["streamer_name"] = req.session.streamer_name;
+            data["loggedin"] = true;
             res.render('stream', data);
         } else {
             res.redirect(`/`);

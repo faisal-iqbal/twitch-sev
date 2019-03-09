@@ -11,6 +11,11 @@ module.exports = {
         }
     },
 
+    logout: (req, res) => {
+        req.session.destroy()
+        res.redirect(`/stream`);
+    },
+
     error: (req, res) => {
         res.render('error');
     }
