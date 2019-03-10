@@ -1,38 +1,31 @@
-# Twitch Authentication Node Sample
-Here you will find a simple Express web app illustrating how to authenticate Twitch API calls using the OAuth authorization code flow.  This sample uses [Express](http://expressjs.com/), [Passport](http://passportjs.org/), and [Handlebars](http://handlebarsjs.com/).
+# Twitch StreamerEventViewer (SEV)
 
 ## Installation
-After you have cloned this repository, use [npm](https://www.npmjs.com/) to install dependencies.
+1) Setup environemnt:
+**For Local :** Create a copy of `.enc.example` file and rename it `.env` **For Heroku:** Setup Config vars on Heroku according to variables defined in `.env.example` file
 
+2) Install dependencies using following command:
 ```sh
 $ npm install
 ```
 
 ## Usage
-Before running this sample, you will need to set four configuration fields at the top of index.js:
-
-1. TWITCH_CLIENT_ID - This is the Client ID of your registered application.  You can register a new application at [https://dev.twitch.tv/dashboard/apps]
-2. TWITCH_CLIENT_SECRET - This is the secret generated for you when you register your application, do not share this. In a production environment, it is STRONGLY recommended that you do not store application secrets on your file system or in your source code.
-3. SESSION_SECRET -  This is the secret Express session middleware uses to sign the session ID cookie.
-4. CALLBACK_URL - This is the callback URL you supply when you register your application.  To run this sample locally use [http://localhost:3000/auth/twitch/callback]
-
-Optionally, you may modify the requested scopes when the /auth/twitch route is defined.
-
-After setting these fields, you may run the server.
-
+Run using following command:
 ```sh
 $ node index.js
 ```
 
-## Next Steps
-From here you can add as many routes, views, and templates as you want and create a real web app for Twitch users.
+# Questions
 
-## License
+## How would you deploy the above on AWS? (ideally a rough architecture diagram will help)
 
-Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+We can utilize AWS fargate to deploy this app. in this case, deployment will start pushing code to GitHub which will trigger jenkins build, using ECS plugin for Jenkins code will be deployed on AWS Fargate.
+A simple diagram (`deployment.png`) is available in current directory.
 
-Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
+## Where do you see bottlenecks in your proposed architecture and how would you approach scaling this app starting from 100 reqs/day to 900MM reqs/day over 6 months?
 
-    http://aws.amazon.com/apache2.0/
+We could leavrage cacheing to reduce requests to server. Right now, streamer page is using session and query string to load video, chat and events of streamer. We can change it to use permalinks and localstorage(I have already built streamer page to subscribe to webhooks after page load, which means it could work even if it loads from cache)
 
-or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. 
+We can also move socket.io(webhooks) part out of this application, into a standalone application. (webhooks handling is done in separate Controller and Model and can easily move out of this application.) This will allow us to scale both applications based on load on each application.
+
+To scale socket.io application, we can create a shared redis which will be used by socket.io servers. We can then horizontally scale socket.io application.
